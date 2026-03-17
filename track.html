@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>KuralKodu - Track Complaint</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="track-page">
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">KuralKodu</div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="report.html">Report</a>
+            <a href="admin.html">Admin</a>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRACK SECTION -->
+
+    <div class="track-container">
+
+        <h1>Track Your Complaint</h1>
+
+        <p>Enter your Complaint ID to check the status</p>
+
+        <input id="complaintId" placeholder="Enter Complaint ID">
+
+        <button onclick="trackComplaint()">Track Complaint</button>
+
+        <div id="statusBox"></div>
+
+    </div>
+
+
+    <script>
+
+        async function trackComplaint() {
+
+            const id = document.getElementById("complaintId").value
+
+            if (!id) {
+                alert("Please enter Complaint ID")
+                return
+            }
+
+            const res = await fetch("http://localhost:3000/complaint/" + id)
+
+            const data = await res.json()
+
+            document.getElementById("statusBox").innerHTML = `
+
+<h2>Status: ${data.status}</h2>
+
+<p><b>Category:</b> ${data.category}</p>
+
+<p><b>Description:</b> ${data.description}</p>
+
+`
+
+        }
+
+    </script>
+
+</body>
+
+</html>

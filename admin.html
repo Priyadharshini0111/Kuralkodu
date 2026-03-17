@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>KuralKodu Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">KuralKodu</div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="report.html">Report</a>
+            <a href="track.html">Track</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-container">
+
+        <h1 class="admin-title">Admin Dashboard</h1>
+
+        <button id="loadBtn">Load Complaints</button>
+
+        <table id="complaintsTable">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+
+        </table>
+
+    </div>
+    <script>
+
+        async function loadComplaints() {
+
+            const res = await fetch("http://localhost:3000/complaints")
+
+            const data = await res.json()
+
+            let rows = ""
+
+            data.forEach(c => {
+
+                rows += `
+
+<tr>
+
+<td>${c.category}</td>
+
+<td>${c.description}</td>
+
+<td>${c.status}</td>
+
+<td>
+
+<button class="resolve-btn" onclick="resolve('${c._id}')">
+Resolve
+</button>
+
+</td>
+
+</tr>
+
+`
+
+            })
+
+            document.getElementById("tableBody").innerHTML = rows
+
+        }
+
+
+        async function resolve(id) {
+
+            await fetch("http://localhost:3000/update/" + id, {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    status: "Resolved"
+
+                })
+
+            })
+
+            loadComplaints()
+
+        }
+
+    </script>
+
+</body>
+
+</html>

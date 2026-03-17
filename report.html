@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>KuralKodu - Report Emergency</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">KuralKodu</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="track.html">Track</a>
+            <a href="admin.html">Admin</a>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <h2>🚨 Report Emergency</h2>
+
+        <form id="reportForm">
+
+            <select id="category">
+                <option>Fire</option>
+                <option>Garbage</option>
+                <option>Water Logging</option>
+                <option>Water Supply</option>
+            </select>
+
+            <textarea id="description" placeholder="Describe the issue"></textarea>
+
+            <p id="locationText">Detecting location...</p>
+
+            <input type="file" id="image">
+
+            <button type="submit">Submit Complaint</button>
+
+        </form>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
